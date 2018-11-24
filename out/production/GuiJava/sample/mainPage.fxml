@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main">
+   <children>
+      <Pane prefHeight="502.0" prefWidth="179.0" style="-fx-background-color: #2b59c3;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" prefHeight="51.0" prefWidth="181.0" text="TexiFy" textFill="#ebd8b8">
+               <font>
+                  <Font name="Calibri" size="43.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="importButton" layoutX="-1.0" layoutY="347.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Import Sheet" textFill="#ffeecf" />
+            <JFXButton fx:id="exportButton" layoutX="-1.0" layoutY="398.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Sheet" textFill="#ffeecf" />
+         </children>
+      </Pane>
+      <Pane prefHeight="502.0" prefWidth="585.0" snapToPixel="false">
+         <children>
+            <Label alignment="CENTER" layoutX="2.0" layoutY="1.0" prefHeight="51.0" prefWidth="585.0" text="File List">
+               <font>
+                  <Font name="Calibri" size="35.0" />
+               </font>
+            </Label>
+            <Pane layoutX="2.0" layoutY="108.0" prefHeight="331.0" prefWidth="585.0">
+               <children>
+                  <JFXListView fx:id="fileList" layoutX="54.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="332.0" prefWidth="443.0" />
+               </children>
+            </Pane>
+            <JFXButton fx:id="removeFileButton" layoutX="14.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Remove File" textFill="WHITE" />
+            <JFXButton fx:id="validateButton" layoutX="198.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="189.0" style="-fx-background-color: #253c78;" text="Validate Selected File" textFill="WHITE" />
+            <JFXButton fx:id="validateAllButton" layoutX="435.0" layoutY="469.0" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Validate All" textFill="WHITE" />
+         </children></Pane>
+   </children>
+</HBox>
