@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane prefHeight="502.0" prefWidth="179.0" style="-fx-background-color: #2b59c3;">
          <children>
@@ -16,8 +16,6 @@
                   <Font name="Calibri" size="43.0" />
                </font>
             </Label>
-            <JFXButton fx:id="importButton" layoutX="-1.0" layoutY="321.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Import Sheet" textFill="#ffeecf" />
-            <JFXButton fx:id="exportButton" layoutX="-1.0" layoutY="372.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Sheet" textFill="#ffeecf" />
          </children>
       </Pane>
       <Pane prefHeight="502.0" prefWidth="585.0" snapToPixel="false">
@@ -32,6 +30,8 @@
                               <Font size="41.0" />
                            </font>
                         </Label>
+                        <JFXButton fx:id="removeExam" layoutX="147.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Exam" textFill="WHITE" />
+                        <JFXButton fx:id="importExam" layoutY="384.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add exam" textFill="#ffeecf" />
                      </children>
                   </Pane>
                   <Pane layoutX="293.0" prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: silver;">
@@ -42,13 +42,15 @@
                               <Font size="41.0" />
                            </font>
                         </Label>
+                        <JFXButton fx:id="removeStudent" layoutX="157.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Student" textFill="WHITE" />
+                        <JFXButton fx:id="importStudent" layoutX="14.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add student" textFill="#ffeecf" />
                      </children>
                   </Pane>
+                  <JFXButton fx:id="exportButton1" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Validate" textFill="#ffeecf" />
+                  <JFXButton fx:id="ex" layoutX="204.0" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Export exam" textFill="#ffeecf" />
+                  <JFXButton fx:id="ex1" layoutX="406.0" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Export Validated" textFill="#ffeecf" />
                </children>
             </Pane>
-            <JFXButton fx:id="removeFileButton" layoutX="14.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Remove Selected" textFill="WHITE" />
-            <JFXButton fx:id="validateButton" layoutX="198.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="189.0" style="-fx-background-color: #253c78;" text="Validate Selected File" textFill="WHITE" />
-            <JFXButton fx:id="validateAllButton" layoutX="435.0" layoutY="469.0" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Validate All" textFill="WHITE" />
          </children></Pane>
    </children>
 </HBox>
