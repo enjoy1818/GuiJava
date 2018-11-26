@@ -19,23 +19,26 @@ public class Main extends Application {
     private final FileChooser fileChooser = new FileChooser();
     private final FileChooser fileSaver = new FileChooser();
     private ArrayList<File> fileListArray = new ArrayList<>();
+    private ArrayList<Student> studentArrayList = new ArrayList<>();
     @Override
     public void start(Stage Stages) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
         primaryStage = Stages;
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 780, 600));
         primaryStage.show();
     }
     @FXML
-    private Button importButton, validateButton, exportButton, removeFileButton, validateAllButton;
+    private Button importExam, validateButton, exportButton, removeFileButton, validateAllButton, importStudent;
     @FXML
-    private ListView<String> fileList;
+    private ListView<String> studentFileList, examFileList;
     @FXML
     private void eventHandler(ActionEvent evnt){
-        if(evnt.getSource().equals(importButton)){
+        if(evnt.getSource().equals(importExam)){
 //            Import file for path only
+
             fileChooser.setTitle("Import exam images");
+//            add
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("All images", "*.*"),
                     new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
@@ -44,21 +47,21 @@ public class Main extends Application {
             fileListArray.addAll(fileChooser.showOpenMultipleDialog(primaryStage));
             if(fileListArray != null) {
                 for(File file : fileListArray){
-                    fileList.getItems().add(file.getName()+" : "+file.getAbsolutePath());
+                    studentFileList.getItems().add(file.getName()+" : "+file.getAbsolutePath());
                 }
                 removeFileButton.setDisable(false);
             }
             System.out.println("Imported");
             System.out.println(fileListArray);
         }else if(evnt.getSource().equals(removeFileButton)){
-            int selectedItem = fileList.getSelectionModel().getSelectedIndex();
-            if(!fileList.getItems().isEmpty()){
+            int selectedItem = studentFileList.getSelectionModel().getSelectedIndex();
+            if(!studentFileList.getItems().isEmpty()){
                 fileListArray.remove(selectedItem);
-                fileList.getItems().remove(selectedItem);
+                studentFileList.getItems().remove(selectedItem);
                 System.out.println(fileListArray);
-                fileList.refresh();
+                studentFileList.refresh();
                 System.out.println("File removed");
-                if(fileList.getItems().isEmpty()){
+                if(studentFileList.getItems().isEmpty()){
                     removeFileButton.setDisable(true);
                     fileListArray.clear();
                 }
@@ -69,7 +72,7 @@ public class Main extends Application {
 
 
         }else if(evnt.getSource().equals(exportButton)){
-            String sampleStudent = "Jack Damian, 60";
+            String sampleStudent = "EX01, Math, 60070000, Jack, 80";
             fileSaver.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("csv", "*.csv"),
                     new FileChooser.ExtensionFilter("txt", "*.txt")
@@ -79,7 +82,7 @@ public class Main extends Application {
                 try {
                     PrintWriter writer;
                     writer = new PrintWriter(saveFilePath); //Write file with location of file
-                    writer.println("STUDENT NAME, SCORE"); //Write csv head row, seperated with comma
+                    writer.println("Exam sheet number, Exam sheet name, Student ID, Student Name, Score"); //Write csv head row, seperated with comma
                     writer.println(sampleStudent); //Write csv data row
                     writer.close();
                 }catch (Exception ex){

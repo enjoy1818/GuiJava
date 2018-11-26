@@ -16,25 +16,39 @@
                   <Font name="Calibri" size="43.0" />
                </font>
             </Label>
-            <JFXButton fx:id="importButton" layoutX="-1.0" layoutY="347.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Import Sheet" textFill="#ffeecf" />
-            <JFXButton fx:id="exportButton" layoutX="-1.0" layoutY="398.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Sheet" textFill="#ffeecf" />
+            <JFXButton fx:id="importExam" layoutY="263.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Import exam" textFill="#ffeecf" />
+            <JFXButton fx:id="exportButton" layoutY="365.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export exam sheet" textFill="#ffeecf" />
+            <JFXButton fx:id="importButton1" layoutY="314.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Import student" textFill="#ffeecf" />
+            <JFXButton fx:id="exportButton1" layoutY="416.0" onAction="#eventHandler" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export validated" textFill="#ffeecf" />
          </children>
       </Pane>
       <Pane prefHeight="502.0" prefWidth="585.0" snapToPixel="false">
          <children>
-            <Label alignment="CENTER" layoutX="2.0" layoutY="1.0" prefHeight="51.0" prefWidth="585.0" text="File List">
-               <font>
-                  <Font name="Calibri" size="35.0" />
-               </font>
-            </Label>
-            <Pane layoutX="2.0" layoutY="108.0" prefHeight="331.0" prefWidth="585.0">
+            <Pane prefHeight="477.0" prefWidth="585.0">
                <children>
-                  <JFXListView fx:id="fileList" layoutX="54.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="332.0" prefWidth="443.0" />
+                  <Pane prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: grey;">
+                     <children>
+                        <JFXListView fx:id="examFileList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
+                        <Label alignment="CENTER" prefHeight="72.0" prefWidth="294.0" text="Exam List">
+                           <font>
+                              <Font size="41.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="293.0" prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: silver;">
+                     <children>
+                        <JFXListView fx:id="studentFileList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
+                        <Label alignment="CENTER" prefHeight="72.0" prefWidth="294.0" text="Student List">
+                           <font>
+                              <Font size="41.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <JFXButton fx:id="removeFileButton" layoutX="226.0" layoutY="447.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Remove Selected" textFill="WHITE" />
                </children>
             </Pane>
-            <JFXButton fx:id="removeFileButton" layoutX="14.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Remove File" textFill="WHITE" />
-            <JFXButton fx:id="validateButton" layoutX="198.0" layoutY="469.0" onAction="#eventHandler" prefHeight="32.0" prefWidth="189.0" style="-fx-background-color: #253c78;" text="Validate Selected File" textFill="WHITE" />
-            <JFXButton fx:id="validateAllButton" layoutX="435.0" layoutY="469.0" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #253c78;" text="Validate All" textFill="WHITE" />
          </children></Pane>
    </children>
 </HBox>
