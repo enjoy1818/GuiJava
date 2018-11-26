@@ -24,13 +24,13 @@
                <children>
                   <Pane prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: grey;">
                      <children>
-                        <JFXListView fx:id="examFileList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
+                        <JFXListView fx:id="examList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
                         <Label alignment="CENTER" prefHeight="72.0" prefWidth="294.0" text="Exam List">
                            <font>
                               <Font size="41.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="removeExam" layoutX="147.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Exam" textFill="WHITE" />
+                        <JFXButton fx:id="removeExam" layoutX="147.0" layoutY="384.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Exam" textFill="WHITE" />
                         <JFXButton fx:id="importExam" layoutY="384.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add exam" textFill="#ffeecf" />
                      </children>
                   </Pane>

@@ -3,33 +3,22 @@ package sample;
 public class Exam {
     private String examSolution;
     private String examName;
-    private String examId;
+    private String examNumber;
     public Exam(){}
-    public Exam(String examId, String examName){
-        this.examId = examId;
+    public Exam(String examNumber, String examName, String examSolution){
         this.examName = examName;
+        this.examNumber = examNumber;
+        this.examSolution = examSolution;
     }
-    public String getExamId() {
-        return examId;
+    public String getExamSolution() {
+        return this.examSolution;
     }
 
     public String getExamName() {
-        return examName;
+        return this.examName;
     }
 
-    public String getExamSolution() {
-        return examSolution;
-    }
-
-    public void setExamId(String examId) {
-        this.examId = examId;
-    }
-
-    public void setExamName(String examName) {
-        this.examName = examName;
-    }
-
-    public void setExamSolution(String examSolution) {
-        this.examSolution = examSolution;
+    public String getExamNumber() {
+        return this.examNumber;
     }
 }
