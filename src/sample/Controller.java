@@ -42,7 +42,7 @@ public class Controller implements Initializable {
         testStage.setScene(testScene);
         testStage.show();
     }
-    private void refreshList(){
+    private void refreshList(){ // Using to update list
         examList.getItems().clear();
         studentList.getItems().clear();
         Database db = new Database();
@@ -85,7 +85,7 @@ public class Controller implements Initializable {
             Database db = new Database();
             db.Connect("root", "1234", "test");
             boolean test = db.addExam(examNumber.getText(), examName.getText(), examAnswer.getText());
-            if(test == true){
+            if(test){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Import Status");
                 alert.setHeaderText("Import Success!!!!");
@@ -134,7 +134,7 @@ public class Controller implements Initializable {
         }else if(event.getSource().equals(confirmImportStudent)){
             Database db = new Database();
             db.Connect(dbUname, dbPassword, dbSchema);
-            boolean test = db.addStudent(studentID.getText(), studentName.getText());
+            boolean test = db.addStudent(studentID.getText(), studentName.getText()); //Check redundant information
             if(test){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Import Status");
@@ -149,7 +149,7 @@ public class Controller implements Initializable {
                 alert.setContentText(null);
                 alert.showAndWait();
             }
-            Stage stage = (Stage) confirmImportStudent.getScene().getWindow();
+            Stage stage = (Stage) confirmImportStudent.getScene().getWindow(); //Closing stage when complete
             stage.close();
             db.closeConnection();
         }
