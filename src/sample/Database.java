@@ -20,7 +20,7 @@ public class Database {
     public Connection getConnect() {
         return connect;
     }
-        public ArrayList<Exam> getAllExam(){
+    public ArrayList<Exam> getAllExam(){
         ArrayList<Exam> examList = new ArrayList<>();
         try {
             Statement statement = connect.createStatement();
@@ -76,5 +76,49 @@ public class Database {
         else {
             System.out.println("Connected");
         }
+    }
+
+    public boolean addStudent(){
+       return false;
+    }
+    public ArrayList<Student> getAllStudent(){
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            Statement stmt = connect.createStatement();
+            ResultSet resultSet = stmt.executeQuery("select * from studenttable");
+            while(resultSet.next()){
+                Student temp = new Student();
+                temp.setName(resultSet.getString("studentName"));
+                temp.setStudentID(resultSet.getString("studentID"));
+                students.add(temp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+    public void removeStudent(String StudentID){
+        try {
+            Statement stmt = connect.createStatement();
+            stmt.execute("delete from studenttable where studentID = '"+StudentID+"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean addStudent(String StudentID, String StudentName){
+        try {
+            Statement check = connect.createStatement();
+            ResultSet resultSet = check.executeQuery("select studentID from studenttable where studentID = '" + StudentID+"'");
+            if(!resultSet.isBeforeFirst()){
+                PreparedStatement preparedStatement = connect.prepareStatement("insert into studenttable (studentID, studentName) values(?,?)");
+                preparedStatement.setString(1, StudentID);
+                preparedStatement.setString(2, StudentName);
+                preparedStatement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

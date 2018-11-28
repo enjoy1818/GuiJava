@@ -21,6 +21,7 @@ public class Controller implements Initializable {
         Database db = new Database();
         db.Connect("root", "1234", "test");
         examArrayList = db.getAllExam();
+        studentArrayList = db.getAllStudent();
         db.closeConnection();
     }
     private Scene testScene;
@@ -29,6 +30,7 @@ public class Controller implements Initializable {
     private String dbPassword = "1234";
     private String dbSchema = "test";
     private ArrayList<Exam> examArrayList;
+    private ArrayList<Student> studentArrayList;
     @FXML
     private void changeScene(String url, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -39,23 +41,37 @@ public class Controller implements Initializable {
         testStage.setTitle(title);
         testStage.setScene(testScene);
         testStage.show();
+    }
+    private void refreshList(){
+        examList.getItems().clear();
+        studentList.getItems().clear();
         Database db = new Database();
-        db.Connect("root", "1234", "test");
+        db.Connect(dbUname, dbPassword, dbSchema);
         examArrayList = db.getAllExam();
+        studentArrayList = db.getAllStudent();
         db.closeConnection();
-        for(Exam exam:examArrayList){
-            examList.getItems().add(exam.getExamNumber()+" "+exam.getExamName()+" "+exam.getExamSolution());
+        for(Exam exam : examArrayList){
+            examList.getItems().add(exam.getExamName());
         }
-        examList.refresh();
+        for(Student student : studentArrayList){
+            studentList.getItems().add(student.getName()+" "+student.getStudentID());
+        }
     }
     @FXML
-    private JFXButton importExam, confirmImportExam, removeExam;
+    private JFXButton importExam, confirmImportExam, removeExam, validateButton, refresh, removeStudent, confirmImportStudent, importStudent;
     @FXML
-    private JFXTextField examName, examNumber, examAnswer;
+    private JFXTextField examName, examNumber, examAnswer, studentName, studentID;
     @FXML
-    private JFXListView<String> examList;
+    private JFXListView<String> examList, studentList;
     @FXML
     private void eventHandler(ActionEvent event){
+        if(event.getSource().equals(refresh)){
+            refreshList();
+        }
+        if(event.getSource().equals(validateButton)){
+            System.out.println(studentList.getSelectionModel().getSelectedItems());
+            System.out.println(examList.getSelectionModel().getSelectedItems());
+        }
     }
     @FXML
     private void importExamHandler(ActionEvent event){
@@ -86,9 +102,7 @@ public class Controller implements Initializable {
             Stage stage = (Stage) confirmImportExam.getScene().getWindow();
             stage.close();
             db.closeConnection();
-            examAnswer.setText("");
-            examNumber.setText("");
-            examName.setText("");
+
         }else if(event.getSource().equals(removeExam)){
             int removeIndex = examList.getSelectionModel().getSelectedIndex();
             Database db = new Database();
@@ -97,7 +111,49 @@ public class Controller implements Initializable {
             examList.getItems().remove(removeIndex);
             examArrayList.remove(removeIndex);
             examList.refresh();
+            db.closeConnection();
         }
+    }
+    @FXML
+    private void importStudentHandler(ActionEvent event){
+        if(event.getSource().equals(removeStudent)){
+            int removeIndex = studentList.getSelectionModel().getSelectedIndex();
+            Database db = new Database();
+            db.Connect(dbUname, dbPassword, dbSchema);
+            db.removeStudent(studentArrayList.get(removeIndex).getStudentID());
+            studentArrayList.remove(removeIndex);
+            studentList.getItems().remove(removeIndex);
+            studentList.refresh();
+            db.closeConnection();
+        }else if(event.getSource().equals(importStudent)){
+            try {
+                changeScene("ImportStudentDialog.fxml", "Import Student");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if(event.getSource().equals(confirmImportStudent)){
+            Database db = new Database();
+            db.Connect(dbUname, dbPassword, dbSchema);
+            boolean test = db.addStudent(studentID.getText(), studentName.getText());
+            if(test){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Import Status");
+                alert.setHeaderText("Import Success!!!!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Import Status");
+                alert.setHeaderText("Import Failed!!!!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+            Stage stage = (Stage) confirmImportStudent.getScene().getWindow();
+            stage.close();
+            db.closeConnection();
+        }
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

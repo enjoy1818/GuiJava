@@ -16,39 +16,40 @@
                   <Font name="Calibri" size="43.0" />
                </font>
             </Label>
+            <JFXButton fx:id="refresh" layoutX="-1.0" layoutY="274.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Refresh" textFill="#ffeecf" />
+            <JFXButton fx:id="validateButton" layoutX="-1.0" layoutY="331.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Validate" textFill="#ffeecf" />
+            <JFXButton fx:id="ex" layoutX="-1.0" layoutY="445.0" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export exam" textFill="#ffeecf" />
+            <JFXButton fx:id="ex1" layoutX="-1.0" layoutY="388.0" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Validated" textFill="#ffeecf" />
          </children>
       </Pane>
       <Pane prefHeight="502.0" prefWidth="585.0" snapToPixel="false">
          <children>
-            <Pane prefHeight="477.0" prefWidth="585.0">
+            <Pane prefHeight="502.0" prefWidth="585.0">
                <children>
-                  <Pane prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: grey;">
+                  <Pane prefHeight="502.0" prefWidth="294.0" style="-fx-background-color: grey;">
                      <children>
-                        <JFXListView fx:id="examList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
+                        <JFXListView fx:id="examList" layoutX="23.0" layoutY="72.0" prefHeight="317.0" prefWidth="248.0" />
                         <Label alignment="CENTER" prefHeight="72.0" prefWidth="294.0" text="Exam List">
                            <font>
                               <Font size="41.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="removeExam" layoutX="147.0" layoutY="384.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Exam" textFill="WHITE" />
-                        <JFXButton fx:id="importExam" layoutY="384.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add exam" textFill="#ffeecf" />
+                        <JFXButton fx:id="removeExam" layoutX="147.0" layoutY="410.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Exam" textFill="WHITE" />
+                        <JFXButton fx:id="importExam" layoutY="410.0" onAction="#importExamHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add exam" textFill="#ffeecf" />
                      </children>
                   </Pane>
-                  <Pane layoutX="293.0" prefHeight="449.0" prefWidth="294.0" style="-fx-background-color: silver;">
+                  <Pane layoutX="293.0" prefHeight="502.0" prefWidth="294.0" style="-fx-background-color: silver;">
                      <children>
-                        <JFXListView fx:id="studentFileList" layoutX="23.0" layoutY="76.0" prefHeight="279.0" prefWidth="248.0" />
+                        <JFXListView fx:id="studentList" layoutX="23.0" layoutY="72.0" prefHeight="317.0" prefWidth="248.0" />
                         <Label alignment="CENTER" prefHeight="72.0" prefWidth="294.0" text="Student List">
                            <font>
                               <Font size="41.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="removeStudent" layoutX="157.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Student" textFill="WHITE" />
-                        <JFXButton fx:id="importStudent" layoutX="14.0" layoutY="384.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add student" textFill="#ffeecf" />
+                        <JFXButton fx:id="removeStudent" layoutX="160.0" layoutY="410.0" onAction="#importStudentHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Remove Student" textFill="WHITE" />
+                        <JFXButton fx:id="importStudent" layoutX="13.0" layoutY="410.0" onAction="#importStudentHandler" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #253c78;" text="Add student" textFill="#ffeecf" />
                      </children>
                   </Pane>
-                  <JFXButton fx:id="exportButton1" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Validate" textFill="#ffeecf" />
-                  <JFXButton fx:id="ex" layoutX="204.0" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Export exam" textFill="#ffeecf" />
-                  <JFXButton fx:id="ex1" layoutX="406.0" layoutY="449.0" prefHeight="51.0" prefWidth="181.0" style="-fx-background-color: #253c78;" text="Export Validated" textFill="#ffeecf" />
                </children>
             </Pane>
          </children></Pane>
