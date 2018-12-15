@@ -67,7 +67,7 @@ public class Controller implements Initializable {
     }
     @FXML
     private JFXButton importExam, confirmImportExam, removeExam, validateButton, refresh, removeStudent
-            , confirmImportStudent, importStudent, exportExam;
+            , confirmImportStudent, importStudent, exportExam, exportValidated;
     @FXML
     private JFXTextField examName, examNumber, examAnswer, studentName, studentID;
     @FXML
@@ -96,7 +96,7 @@ public class Controller implements Initializable {
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Import Status");
-                alert.setHeaderText("Validate Failed!!!!");
+                alert.setHeaderText("Validate Failed!!!!\nDuplicate Validation.");
                 alert.setContentText(null);
                 alert.showAndWait();
             }
@@ -132,6 +132,34 @@ public class Controller implements Initializable {
                 }
             }
         }
+        else if(event.getSource().equals(exportValidated)){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("CSV", "*.csv"),
+                    new FileChooser.ExtensionFilter("TEXT", "*.txt"));
+            File fileSaver = fileChooser.showSaveDialog(primaryStage);
+            if(fileSaver != null){
+                try {
+                    PrintWriter writer = new PrintWriter(fileSaver);
+                    Database db = new Database();
+                    db.connect(dbUname, dbPassword, dbSchema);
+                    ArrayList<String> tempValidatedColumn = db.getValidateColumn();
+                    ArrayList<String> tempValidatedRow = db.getAllValidated();
+                    for(String examCol : tempValidatedColumn){
+                        writer.print(examCol+",");
+                    }
+                    writer.println();
+                    for(String validatedItem : tempValidatedRow){
+                        writer.print(validatedItem);
+                        writer.println();
+                    }
+                    writer.close();
+                    db.closeConnection();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     @FXML
     private void importExamHandler(ActionEvent event){
@@ -155,7 +183,7 @@ public class Controller implements Initializable {
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Import Status");
-                alert.setHeaderText("Import Failed!!!!");
+                alert.setHeaderText("Import Failed!!!!\nDuplicate Exam.");
                 alert.setContentText(null);
                 alert.showAndWait();
             }
@@ -205,7 +233,7 @@ public class Controller implements Initializable {
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Import Status");
-                alert.setHeaderText("Import Failed!!!!");
+                alert.setHeaderText("Import Failed!!!!\nDuplicate Student.");
                 alert.setContentText(null);
                 alert.showAndWait();
             }

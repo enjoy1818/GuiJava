@@ -22,7 +22,7 @@
             <JFXButton fx:id="refresh" layoutX="-1.0" layoutY="274.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Refresh" textFill="#ffeecf" />
             <JFXButton fx:id="validateButton" layoutX="-1.0" layoutY="331.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Validate" textFill="#ffeecf" />
             <JFXButton fx:id="exportExam" layoutX="-1.0" layoutY="445.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export exam" textFill="#ffeecf" />
-            <JFXButton fx:id="ex1" layoutX="-1.0" layoutY="388.0" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Validated" textFill="#ffeecf" />
+            <JFXButton fx:id="exportValidated" layoutX="-1.0" layoutY="388.0" onAction="#eventHandler" prefHeight="57.0" prefWidth="181.0" style="-fx-background-color: transparent;" text="Export Validated" textFill="#ffeecf" />
          </children>
       </Pane>
       <Pane prefHeight="502.0" prefWidth="585.0" snapToPixel="false">

@@ -148,15 +148,30 @@ public class Database {
         }
         return examCol;
     }
-    public ArrayList<String> getValidated(){
+    public ArrayList<String> getValidateColumn(){
+        ArrayList<String> validateCol = new ArrayList<>();
+        try{
+            Statement statement = connect.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from validatedtable");
+            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            for(int i = 2;i<= resultSetMetaData.getColumnCount();i++){
+                validateCol.add(resultSetMetaData.getColumnName(i));
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return validateCol;
+    }
+
+    public ArrayList<String> getAllValidated(){
         ArrayList<String> temp = new ArrayList<>();
         try{
             Statement stmt = connect.createStatement();
             ResultSet resultSet = stmt.executeQuery("select * from validatedtable");
             while(resultSet.next()){
-                temp.add(resultSet.getString("ExamName")+" "+resultSet.getString("ExamNumber")+" "
-                +resultSet.getString("StudentID")+" "+resultSet.getString("StudentName")+
-                        " "+resultSet.getInt("Score"));
+                temp.add(resultSet.getString("ExamName")+","+resultSet.getString("ExamNumber")+","
+                +resultSet.getString("StudentID")+","+resultSet.getString("StudentName")+
+                        ","+resultSet.getInt("Score")+","+resultSet.getTimestamp("TimeValidated"));
             }
         }catch(Exception ex){
 
