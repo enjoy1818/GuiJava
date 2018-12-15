@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import java.io.File;
 public class Main extends Application {
+    public static Stage primaryStage;
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
+        primaryStage = stage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("mainPage2.fxml"));
         Parent root = loader.load();
@@ -19,7 +21,6 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
     }
-
     public static void main(String[] args) {
         launch(args);
     }

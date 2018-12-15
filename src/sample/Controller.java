@@ -10,16 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static sample.Main.primaryStage;
+
 public class Controller implements Initializable {
     public Controller(){
         Database db = new Database();
-        db.Connect("root", "1234", "test");
+        db.connect(this.dbUname, this.dbPassword, this.dbSchema);
         examArrayList = db.getAllExam();
         studentArrayList = db.getAllStudent();
         db.closeConnection();
@@ -46,19 +54,20 @@ public class Controller implements Initializable {
         examList.getItems().clear();
         studentList.getItems().clear();
         Database db = new Database();
-        db.Connect(dbUname, dbPassword, dbSchema);
+        db.connect(dbUname, dbPassword, dbSchema);
         examArrayList = db.getAllExam();
         studentArrayList = db.getAllStudent();
         db.closeConnection();
         for(Exam exam : examArrayList){
-            examList.getItems().add(exam.getExamName());
+            examList.getItems().add(exam.getExamName()+" "+exam.getExamNumber());
         }
         for(Student student : studentArrayList){
             studentList.getItems().add(student.getName()+" "+student.getStudentID());
         }
     }
     @FXML
-    private JFXButton importExam, confirmImportExam, removeExam, validateButton, refresh, removeStudent, confirmImportStudent, importStudent;
+    private JFXButton importExam, confirmImportExam, removeExam, validateButton, refresh, removeStudent
+            , confirmImportStudent, importStudent, exportExam;
     @FXML
     private JFXTextField examName, examNumber, examAnswer, studentName, studentID;
     @FXML
@@ -68,9 +77,60 @@ public class Controller implements Initializable {
         if(event.getSource().equals(refresh)){
             refreshList();
         }
-        if(event.getSource().equals(validateButton)){
-            System.out.println(studentList.getSelectionModel().getSelectedItems());
-            System.out.println(examList.getSelectionModel().getSelectedItems());
+        else if(event.getSource().equals(validateButton)){
+            int studentValidateIndex = studentList.getSelectionModel().getSelectedIndex();
+            Student tempStudent = studentArrayList.get(studentValidateIndex);
+            int examValidateIndex = examList.getSelectionModel().getSelectedIndex();
+            Exam tempExam = examArrayList.get(examValidateIndex);
+            System.out.println(tempStudent.getName()+" "+tempStudent.getStudentID());
+            System.out.println(tempExam.getExamName()+" "+tempExam.getExamNumber());
+            Database db = new Database();
+            db.connect(this.dbUname, this.dbPassword, this.dbSchema);
+            boolean test = db.addValidated(10, tempStudent.getStudentID(), tempStudent.getName(), tempExam.getExamName(), tempExam.getExamNumber());
+            if(test){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Import Status");
+                alert.setHeaderText("Validate Success!!!!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Import Status");
+                alert.setHeaderText("Validate Failed!!!!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+            db.closeConnection();
+        }else if(event.getSource().equals(exportExam)){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("CSV", "*.csv"),
+                    new FileChooser.ExtensionFilter("TEXT", "*.txt"));
+            File fileSaver =fileChooser.showSaveDialog(primaryStage);
+            if(fileSaver != null){
+                try {
+                    PrintWriter writer = new PrintWriter(fileSaver);
+                    Database db = new Database();
+                    db.connect(dbUname, dbPassword, dbSchema);
+                    ArrayList<String> tempExamCol = db.getExamColumn();
+                    ArrayList<Exam> tempExamList = db.getAllExam();
+                    for(String examCol : tempExamCol){
+                        writer.print(examCol+",");
+                    }
+                    writer.println();
+                    for(Exam exam : tempExamList){
+                        writer.print(exam.getExamId()+",");
+                        writer.print(exam.getExamNumber()+",");
+                        writer.print(exam.getExamName()+",");
+                        writer.print(exam.getExamSolution());
+                        writer.println();
+                    }
+                    writer.close();
+                    db.closeConnection();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     @FXML
@@ -83,7 +143,7 @@ public class Controller implements Initializable {
             }
         }else if(event.getSource().equals(confirmImportExam)){
             Database db = new Database();
-            db.Connect("root", "1234", "test");
+            db.connect(this.dbUname, this.dbPassword, this.dbSchema);
             boolean test = db.addExam(examNumber.getText(), examName.getText(), examAnswer.getText());
             if(test){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -106,7 +166,7 @@ public class Controller implements Initializable {
         }else if(event.getSource().equals(removeExam)){
             int removeIndex = examList.getSelectionModel().getSelectedIndex();
             Database db = new Database();
-            db.Connect(dbUname, dbPassword, dbSchema);
+            db.connect(dbUname, dbPassword, dbSchema);
             db.removeExam(examArrayList.get(removeIndex).getExamNumber());
             examList.getItems().remove(removeIndex);
             examArrayList.remove(removeIndex);
@@ -119,7 +179,7 @@ public class Controller implements Initializable {
         if(event.getSource().equals(removeStudent)){
             int removeIndex = studentList.getSelectionModel().getSelectedIndex();
             Database db = new Database();
-            db.Connect(dbUname, dbPassword, dbSchema);
+            db.connect(dbUname, dbPassword, dbSchema);
             db.removeStudent(studentArrayList.get(removeIndex).getStudentID());
             studentArrayList.remove(removeIndex);
             studentList.getItems().remove(removeIndex);
@@ -133,7 +193,7 @@ public class Controller implements Initializable {
             }
         }else if(event.getSource().equals(confirmImportStudent)){
             Database db = new Database();
-            db.Connect(dbUname, dbPassword, dbSchema);
+            db.connect(dbUname, dbPassword, dbSchema);
             boolean test = db.addStudent(studentID.getText(), studentName.getText()); //Check redundant information
             if(test){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
