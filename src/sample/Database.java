@@ -168,10 +168,13 @@ public class Database {
         try{
             Statement stmt = connect.createStatement();
             ResultSet resultSet = stmt.executeQuery("select * from validatedtable");
+
             while(resultSet.next()){
+//                java.sql.Date validatedTime = resultSet.getDate("TimeValidated");
+                Timestamp timestamp = new Timestamp(resultSet.getTimestamp("TimeValidated").getTime());
                 temp.add(resultSet.getString("ExamName")+","+resultSet.getString("ExamNumber")+","
                 +resultSet.getString("StudentID")+","+resultSet.getString("StudentName")+
-                        ","+resultSet.getInt("Score")+","+resultSet.getTimestamp("TimeValidated"));
+                        ","+resultSet.getInt("Score")+",'"+timestamp.toGMTString()+"'");
             }
         }catch(Exception ex){
 
