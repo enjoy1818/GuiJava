@@ -7,16 +7,30 @@ public class Database {
     public Database(){
 
     }
-    public void connect(String userName, String password, String table){
+    public void connect(String userName, String password, String table, String ServerIP){
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+table, userName, password);
+            connection = DriverManager.getConnection("jdbc:mysql://"+ServerIP+"/"+table, userName, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         this.connect = connection;
     }
+    public void connectGcloud(){
+        Connection connection = null;
+        try {
+            String jdbcUrl = String.format(
+                    "jdbc:mysql://google/%s?cloudSqlInstance=%s"
+                            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false",
+                    "mysql",
+                    "enjoy1818");
 
+            connection = DriverManager.getConnection(jdbcUrl, "root", "025521501");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        this.connect = connection;
+    }
     public Connection getConnect() {
         return connect;
     }
@@ -69,12 +83,12 @@ public class Database {
         }
 
     }
-    public void checkConnection(){
+    public boolean checkConnection(){
         if(connect == null){
-            System.out.println("Not Connected");
+            return false;
         }
         else {
-            System.out.println("Connected");
+            return true;
         }
     }
 
@@ -174,7 +188,7 @@ public class Database {
                 Timestamp timestamp = new Timestamp(resultSet.getTimestamp("TimeValidated").getTime());
                 temp.add(resultSet.getString("ExamName")+","+resultSet.getString("ExamNumber")+","
                 +resultSet.getString("StudentID")+","+resultSet.getString("StudentName")+
-                        ","+resultSet.getInt("Score")+",'"+timestamp.toGMTString()+"'");
+                        ","+resultSet.getInt("Score")+",'"+timestamp.toString()+"'");
             }
         }catch(Exception ex){
 
@@ -203,5 +217,15 @@ public class Database {
             e.printStackTrace();
         }
         return false;
+    }
+    public void removeAllValidated(){
+        try {
+            Statement statement = connect.createStatement();
+            statement.execute("delete from validatedtable");
+            System.out.println("remove complete");
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+
     }
 }
