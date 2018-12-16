@@ -36,10 +36,10 @@ public class Controller implements Initializable {
     }
     private Scene testScene;
     private Stage testStage;
-    private String dbUname;
-    private String dbPassword;
-    private String dbSchema;
-    private String dbAddress;
+    private static String dbUname;
+    private static String dbPassword;
+    private static String dbSchema;
+    private static String dbAddress;
     private ArrayList<Exam> examArrayList;
     private ArrayList<Student> studentArrayList;
     @FXML
@@ -252,8 +252,10 @@ public class Controller implements Initializable {
                 alert.showAndWait();
             }
             else{
+//                System.out.println(this.dbUname+" "+this.dbPassword);
                 Database db = new Database();
                 db.connect(this.dbUname, this.dbPassword, this.dbSchema, this.dbAddress);
+                System.out.println(db.getConnect());
                 boolean test = db.addExam(examNumber.getText(), examName.getText(), examAnswer.getText());
                 if(test){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

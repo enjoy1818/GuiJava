@@ -7,25 +7,21 @@ public class Database {
     public Database(){
 
     }
-    public void connect(String userName, String password, String table, String ServerIP){
+//    Old Mysql
+//    public void connect2(String userName, String password, String table, String ServerIP){
+//        Connection connection = null;
+//        try {
+//            connection = DriverManager.getConnection("jdbc:mysql://"+ServerIP+"/"+table, userName, password);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        this.connect = connection;
+//    }
+    public void connect(String userName, String password,String schema, String awsEndpoint){
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://"+ServerIP+"/"+table, userName, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        this.connect = connection;
-    }
-    public void connectGcloud(){
-        Connection connection = null;
-        try {
-            String jdbcUrl = String.format(
-                    "jdbc:mysql://google/%s?cloudSqlInstance=%s"
-                            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false",
-                    "mysql",
-                    "enjoy1818");
-
-            connection = DriverManager.getConnection(jdbcUrl, "root", "025521501");
+            connection = DriverManager.getConnection("jdbc:mysql://"+awsEndpoint+"/"+schema+"?user="+userName+"&password="+password);
+            System.out.println(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,16 +48,18 @@ public class Database {
     public boolean addExam(String examNumber, String examName, String examAnswer){
         try {
             Statement check = connect.createStatement();
-            ResultSet resultSet = check.executeQuery("select ExamName from examtable where ExamNumber = '" + examNumber+"'");
+            ResultSet resultSet = check.executeQuery("select ExamName from examtable where ExamNumber = " + examNumber+"");
             if(!resultSet.isBeforeFirst()){
                 PreparedStatement preparedStatement = connect.prepareStatement("insert into examtable (ExamNumber, ExamName, ExamAnswer) values(?,?,?)");
                 preparedStatement.setString(1, examNumber);
                 preparedStatement.setString(2, examName);
                 preparedStatement.setString(3, examAnswer);
                 preparedStatement.executeUpdate();
+                System.out.println("OK");
                 return true;
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
