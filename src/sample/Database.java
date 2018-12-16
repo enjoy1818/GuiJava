@@ -48,7 +48,7 @@ public class Database {
     public boolean addExam(String examNumber, String examName, String examAnswer){
         try {
             Statement check = connect.createStatement();
-            ResultSet resultSet = check.executeQuery("select ExamName from examtable where ExamNumber = " + examNumber+"");
+            ResultSet resultSet = check.executeQuery("select ExamName from examtable where ExamNumber = '"+ examNumber+"' and ExamName = '"+examName+"'");
             if(!resultSet.isBeforeFirst()){
                 PreparedStatement preparedStatement = connect.prepareStatement("insert into examtable (ExamNumber, ExamName, ExamAnswer) values(?,?,?)");
                 preparedStatement.setString(1, examNumber);

@@ -36,10 +36,10 @@ public class Controller implements Initializable {
     }
     private Scene testScene;
     private Stage testStage;
-    private static String dbUname;
-    private static String dbPassword;
-    private static String dbSchema;
-    private static String dbAddress;
+    private static String dbUname = "enjoy1818";
+    private static String dbPassword = "025521501a";
+    private static String dbSchema = "examvalidation";
+    private static String dbAddress = "examvalidatorinstance.cmkn27aztcgy.ap-southeast-1.rds.amazonaws.com";
     private ArrayList<Exam> examArrayList;
     private ArrayList<Student> studentArrayList;
     @FXML
@@ -265,7 +265,7 @@ public class Controller implements Initializable {
                     alert.showAndWait();
                 }
                 else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Import Status");
                     alert.setHeaderText("Import Failed!!!!\nDuplicate Exam.");
                     alert.setContentText(null);
@@ -338,6 +338,5 @@ public class Controller implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
