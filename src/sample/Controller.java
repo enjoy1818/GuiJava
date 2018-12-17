@@ -37,10 +37,10 @@ public class Controller implements Initializable {
     }
     private Scene testScene;
     private Stage testStage;
-    private static String dbUname = "enjoy1818";
-    private static String dbPassword = "025521501a";
-    private static String dbSchema = "examvalidation";
-    private static String dbAddress = "examvalidatorinstance.cmkn27aztcgy.ap-southeast-1.rds.amazonaws.com";
+    private static String dbUname = "";
+    private static String dbPassword = "";
+    private static String dbSchema = "";
+    private static String dbAddress = "";
     private ArrayList<Exam> examArrayList;
     private ArrayList<Student> studentArrayList;
     @FXML
@@ -163,12 +163,13 @@ public class Controller implements Initializable {
                         new FileChooser.ExtensionFilter("*.JPG", "*.jpg"));
                 File fileOpener =fileChooser.showOpenDialog(primaryStage);
                 if(fileOpener != null){
-                    
+
                     ScanMain validater = new ScanMain();
                     result = validater.validate(fileOpener);
                     Database db = new Database();
                     db.connect(this.dbUname, this.dbPassword, this.dbSchema, this.dbAddress);
                     Exam tempExamSheet = db.getExam(tempExam.getExamName(), tempExam.getExamNumber());
+                    String StudentAnswer = String.join(",", result);
                     int tempScore = 0;
                     char[] tempCharArr = tempExamSheet.getExamSolution().toCharArray();
                     for(int i = 0;i<result.length;i++){
@@ -176,7 +177,7 @@ public class Controller implements Initializable {
                             tempScore += 1;
                         }
                     }
-                    boolean test = db.addValidated(tempScore, tempStudent.getStudentID(), tempStudent.getName(), tempExam.getExamName(), tempExam.getExamNumber());
+                    boolean test = db.addValidated(tempScore, tempStudent.getStudentID(), tempStudent.getName(), tempExam.getExamName(), tempExam.getExamNumber(), StudentAnswer);
                     if(test){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Import Status");

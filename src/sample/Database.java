@@ -186,25 +186,26 @@ public class Database {
                 Timestamp timestamp = new Timestamp(resultSet.getTimestamp("TimeValidated").getTime());
                 temp.add(resultSet.getString("ExamName")+","+resultSet.getString("ExamNumber")+","
                 +resultSet.getString("StudentID")+","+resultSet.getString("StudentName")+
-                        ","+resultSet.getInt("Score")+",'"+timestamp.toString()+"'");
+                        ","+resultSet.getInt("Score")+",'"+timestamp.toString()+"','"+resultSet.getString("StudentAnswer")+"'");
             }
         }catch(Exception ex){
 
         }
         return temp;
     }
-    public boolean addValidated(int score, String StudentID,String StudentName, String ExamName, String ExamNumber){
+    public boolean addValidated(int score, String StudentID,String StudentName, String ExamName, String ExamNumber, String StudentAnswer){
         try {
             Statement statement = connect.createStatement();
             ResultSet resultSet = statement.executeQuery("Select * from validatedtable where StudentID='"+StudentID+"' and ExamName='"+ExamName+"' and ExamNumber='"+ExamNumber+"'");
             if(!resultSet.isBeforeFirst()){
-                PreparedStatement preparedStatement = connect.prepareStatement("insert into validatedtable (ExamName, ExamNumber, StudentID, StudentName, Score) " +
-                        "values(?, ?, ?, ?, ?)");
+                PreparedStatement preparedStatement = connect.prepareStatement("insert into validatedtable (ExamName, ExamNumber, StudentID, StudentName, Score, StudentAnswer) " +
+                        "values(?, ?, ?, ?, ?, ?)");
                 preparedStatement.setString(1, ExamName);
                 preparedStatement.setString(2, ExamNumber);
                 preparedStatement.setString(3, StudentID);
                 preparedStatement.setString(4, StudentName);
                 preparedStatement.setInt(5, score);
+                preparedStatement.setString(6, StudentAnswer);
                 preparedStatement.executeUpdate();
                 return true;
             }

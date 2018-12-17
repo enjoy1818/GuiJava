@@ -13,14 +13,14 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/Download/Exe/opencv/build/java/opencv-343.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/opencv-343.jar!/" />
         </CLASSES>
         <JAVADOC />
         <NATIVE>
-          <root url="file://E:/Download/Exe/opencv/build/java/x64" />
+          <root url="file://$MODULE_DIR$/src/lib/x64" />
         </NATIVE>
         <SOURCES>
-          <root url="jar://E:/Download/Exe/opencv/build/java/opencv-343.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/opencv-343.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
