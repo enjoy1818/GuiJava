@@ -6,20 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/GuiJava_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/GuiJava_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuiJava.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GuiJava.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GuiJava_jar/GuiJava.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GuiJava_jar/GuiJava.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/BubbleSheetScanner-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/BubbleSheetScanner-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/META-INF/BubbleSheetScanner-master.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/SheetScanner/ScanMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/SheetScanner/ScanMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/SheetScanner/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BubbleSheetScanner-master/SheetScanner/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GuiJava/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GuiJava/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GuiJava/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GuiJava/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -103,20 +90,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="269" column="42" lean-forward="true" selection-start-line="269" selection-start-column="42" selection-end-line="269" selection-end-column="42" />
+            <state relative-caret-position="452">
+              <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -272,7 +262,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545086092098" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545086227880" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/x64" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -448,7 +438,7 @@
       <window_info anchor="bottom" id="Profiler" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="12" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.3535188" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3535188" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -604,13 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/BubbleSheetScanner-master/SheetScanner/ScanMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -633,8 +616,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="269" column="42" lean-forward="true" selection-start-line="269" selection-start-column="42" selection-end-line="269" selection-end-column="42" />
+        <state relative-caret-position="452">
+          <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
