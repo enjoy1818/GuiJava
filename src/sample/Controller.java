@@ -271,6 +271,13 @@ public class Controller implements Initializable {
                 alert.setContentText(null);
                 alert.showAndWait();
             }
+            else if(examAnswer.getText().length() < 20 || examAnswer.getText().length() > 20){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Import Status");
+                alert.setHeaderText("Import Failed!!!!\nInvalid Answer length");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
             else{
 //                System.out.println(this.dbUname+" "+this.dbPassword);
                 Database db = new Database();
