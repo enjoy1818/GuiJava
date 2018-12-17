@@ -9,5 +9,20 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="jfoenix-9.0.6" level="project" />
     <orderEntry type="library" exported="" name="mysql-connector-java-8.0.13" level="project" />
+    <orderEntry type="module" module-name="BubbleSheetScanner-master" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Download/Exe/opencv/build/java/opencv-343.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://E:/Download/Exe/opencv/build/java/x64" />
+        </NATIVE>
+        <SOURCES>
+          <root url="jar://E:/Download/Exe/opencv/build/java/opencv-343.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

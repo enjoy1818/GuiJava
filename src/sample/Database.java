@@ -226,4 +226,14 @@ public class Database {
         }
 
     }
+    public Exam getExam(String ExamName, String ExamNumber){
+        Exam temp = null;
+        try (Statement statement = connect.createStatement()) {
+            ResultSet result = statement.executeQuery("select * from examtable where ExamName = '" + ExamName+"' and ExamNumber = '"+ExamNumber+"'");
+            while(result.next())
+                temp = new Exam(result.getString(1), result.getString(2), result.getString(3), result.getString(4));
+        }
+        catch (SQLException ex){}
+        return temp;
+    }
 }

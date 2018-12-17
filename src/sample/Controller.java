@@ -1,8 +1,8 @@
 package sample;
 
+import SheetScanner.ScanMain;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 import static sample.Main.primaryStage;
 
@@ -146,6 +147,7 @@ public class Controller implements Initializable {
                 alert.showAndWait();
             }
             else{
+                String[] result = new String[20];
                 int studentValidateIndex = studentList.getSelectionModel().getSelectedIndex();
                 Student tempStudent = studentArrayList.get(studentValidateIndex);
                 int examValidateIndex = examList.getSelectionModel().getSelectedIndex();
@@ -153,27 +155,44 @@ public class Controller implements Initializable {
                 System.out.println(tempStudent.getName()+" "+tempStudent.getStudentID());
                 System.out.println(tempExam.getExamName()+" "+tempExam.getExamNumber());
 //              vvvvv  Validate here vvvvv
-
-
-//              ^^^^^  Validate here ^^^^^
-                Database db = new Database();
-                db.connect(this.dbUname, this.dbPassword, this.dbSchema, this.dbAddress);
-//                Change a score to a validated score
-                boolean test = db.addValidated(10, tempStudent.getStudentID(), tempStudent.getName(), tempExam.getExamName(), tempExam.getExamNumber());
-                if(test){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Import Status");
-                    alert.setHeaderText("Validate Success!!!!");
-                    alert.setContentText(null);
-                    alert.showAndWait();
-                }else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Import Status");
-                    alert.setHeaderText("Validate Failed!!!!\nDuplicate Validation.");
-                    alert.setContentText(null);
-                    alert.showAndWait();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("*All file", "*.*"),
+                        new FileChooser.ExtensionFilter("*.JPEG", "*.jpeg"),
+                        new FileChooser.ExtensionFilter("*.PNG", "*.png*"),
+                        new FileChooser.ExtensionFilter("*.JPG", "*.jpg"));
+                File fileOpener =fileChooser.showOpenDialog(primaryStage);
+                if(fileOpener != null){
+                    
+                    ScanMain validater = new ScanMain();
+                    result = validater.validate(fileOpener);
+                    Database db = new Database();
+                    db.connect(this.dbUname, this.dbPassword, this.dbSchema, this.dbAddress);
+                    Exam tempExamSheet = db.getExam(tempExam.getExamName(), tempExam.getExamNumber());
+                    int tempScore = 0;
+                    char[] tempCharArr = tempExamSheet.getExamSolution().toCharArray();
+                    for(int i = 0;i<result.length;i++){
+                        if(Character.toUpperCase(tempCharArr[i]) == Character.toUpperCase(result[i].toString().toCharArray()[0])){
+                            tempScore += 1;
+                        }
+                    }
+                    boolean test = db.addValidated(tempScore, tempStudent.getStudentID(), tempStudent.getName(), tempExam.getExamName(), tempExam.getExamNumber());
+                    if(test){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Import Status");
+                        alert.setHeaderText("Validate Success!!!!");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Import Status");
+                        alert.setHeaderText("Validate Failed!!!!\nDuplicate Validation.");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                    db.closeConnection();
                 }
-                db.closeConnection();
+//              ^^^^^  Validate here ^^^^^
             }
         }else if(event.getSource().equals(exportExam)){
             FileChooser fileChooser = new FileChooser();
